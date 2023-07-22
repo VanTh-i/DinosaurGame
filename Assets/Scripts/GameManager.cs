@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 
     private Player player;
     private Spawner spawner;
+
+    public GameObject gameOverUI;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -43,7 +45,7 @@ public class GameManager : MonoBehaviour
     {
         gameSpeed += gameSpeedIncrease * Time.deltaTime;
     }
-    void NewGame()
+    public void NewGame()
     {
         Obstacle[] obstacles = FindObjectsOfType<Obstacle>();
         foreach (var obstacle in obstacles)
@@ -54,6 +56,7 @@ public class GameManager : MonoBehaviour
         gameSpeed = initialGameSpeed;
         enabled = true;
 
+        gameOverUI.SetActive(false);
         player.gameObject.SetActive(true);
         spawner.gameObject.SetActive(true);
     }
@@ -62,6 +65,7 @@ public class GameManager : MonoBehaviour
         gameSpeed = 0f;
         enabled = false;
 
+        gameOverUI.SetActive(true);
         player.gameObject.SetActive(false);
         spawner.gameObject.SetActive(false);
     }
